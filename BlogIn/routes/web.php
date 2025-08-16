@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +44,8 @@ Route::get('/update', function () {
 })->name('update');
 
 Route::post('/update', [userController::class, 'update'])->name('user.update');
+
+
+
+Route::post('/create', [PostController::class, 'create'])->name('post.create');
 
