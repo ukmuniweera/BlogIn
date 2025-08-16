@@ -46,12 +46,28 @@ class userController extends Controller
 
     public function update(Request $request)
     {
-        $user = User::find($request->id);
-        if ($user) {
-            $user->name = $request->name;
-            $user->password = bcrypt( $request->password);
-            return back();
+        $user = Auth::user();
+
+        $request->validate([
+            'name' => 'nullable',
+            'password' => 'nullable|min:8',
+        ]);
+
+        if (!$request->filled('name') && !$request->filled('password')) {
+            return redirect()->route('dashboard')->with('session', 'Account not updated.');
         }
+
+        if ($request->filled('name')) {
+            $user->name = $request->name;
+        }
+
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('dashboard')->with('session', 'Account updated successfully.');
     }
 
     public function delete()

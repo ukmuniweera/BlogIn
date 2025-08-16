@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="btn btn-sm btn-outline-secondary mr-2" href="{{ route('user.logout') }}">Logout</a>
-                    <a class="btn btn-sm btn-outline-secondary mr-2" href="#">Update
+                    <a class="btn btn-sm btn-outline-secondary mr-2" href="{{ route('update') }}">Update
                         Account</a>
                     <a class="btn btn-sm btn-outline-secondary" href="{{ route('user.delete') }}">Delete Account</a>
                 </div>

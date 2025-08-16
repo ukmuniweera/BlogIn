@@ -38,3 +38,9 @@ Route::get('/logout', [userController::class, 'logout'])->name('user.logout');
 
 Route::get('/delete', [userController::class, 'delete'])->name('user.delete');
 
+Route::get('/update', function () {
+    return view('update');
+})->name('update');
+
+Route::post('/update', [userController::class, 'update'])->name('user.update');
+
