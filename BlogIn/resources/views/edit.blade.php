@@ -2,7 +2,11 @@
 
 @section('content')
     <h1>Edit Post</h1>
-    <form method="POST" action="{{ route('post.create') }}">
+
+    <p>{{ $post->title }}</p>
+
+
+    {{-- <form method="POST" action="{{ route('post.create') }}">
         @csrf
         <div class="form-group">
             <label>Title</label>
@@ -13,5 +17,5 @@
             <textarea class="form-control" name="content" rows="10"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Edit</button>
-    </form>
+    </form> --}}
 @endsection
