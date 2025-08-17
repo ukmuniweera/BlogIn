@@ -49,3 +49,8 @@ Route::post('/update', [userController::class, 'update'])->name('user.update');
 
 Route::post('/create', [PostController::class, 'create'])->name('post.create');
 
+Route::get('/allposts', function () {
+    return view('allPosts');
+})->name('allPosts');
+
+Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');

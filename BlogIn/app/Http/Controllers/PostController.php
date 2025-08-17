@@ -14,5 +14,13 @@ class PostController extends Controller
             'content' => $request->content,
             'user_id' => auth()->user()->id
         ]);
+
+        return back();
+    }
+
+    public function getall()
+    {
+        $posts = Post::where('user_id', auth()->user()->id)->get();
+        return view('allPosts', compact('posts'));
     }
 }
