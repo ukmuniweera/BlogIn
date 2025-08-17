@@ -17,8 +17,8 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->content }}</td>
                     <td>
-                        <a href="" type="button" class="btn btn-success">Edit</a>
-                        <a href="" type="button" class="btn btn-danger">Delete</a>
+                        <a href="post/edit" type="button" class="btn btn-success">Edit</a>
+                        <a href="{{ route('post.delete', $post->id) }}" type="button" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             @endforeach

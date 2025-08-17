@@ -54,3 +54,11 @@ Route::get('/allposts', function () {
 })->name('allPosts');
 
 Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
+
+Route::get('post/edit', function () {
+    return view('edit');
+});
+
+Route::post('post/edit/{postId}', [PostController::class, 'edit'])->name('post.edit');
+
+Route::get('post/delete/{postId}', [PostController::class, 'delete'])->name('post.delete');

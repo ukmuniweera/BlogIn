@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -22,5 +23,27 @@ class PostController extends Controller
     {
         $posts = Post::where('user_id', auth()->user()->id)->get();
         return view('allPosts', compact('posts'));
+    }
+
+    public function edit(Request $request, $postId)
+    {
+        $request->validate([
+            'title' => 'requred',
+            'content' => 'requred'
+        ]);
+
+        $post = Post::findOrFail($postId);
+
+        $post->title = $request->title;
+        $post->content = $request->content;
+
+        return back();
+    }
+
+    public function delete($postId)
+    {
+        $post = Post::findOrFail($postId);
+        $post->delete();
+        return back();
     }
 }
