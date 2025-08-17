@@ -25,19 +25,9 @@ class PostController extends Controller
         return view('allPosts', compact('posts'));
     }
 
-    public function edit(Request $request, $postId)
+    public function edit()
     {
-        $request->validate([
-            'title' => 'requred',
-            'content' => 'requred'
-        ]);
-
-        $post = Post::findOrFail($postId);
-
-        $post->title = $request->title;
-        $post->content = $request->content;
-
-        return back();
+        return view('post.edit', compact('postId'));
     }
 
     public function delete($postId)

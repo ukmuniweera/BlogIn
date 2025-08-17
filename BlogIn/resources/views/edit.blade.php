@@ -1,7 +1,7 @@
 @extends('layouts.dashlay')
 
 @section('content')
-<h1>Edit Post</h1>
+    <h1>Edit Post</h1>
     <form method="POST" action="{{ route('post.create') }}">
         @csrf
         <div class="form-group">

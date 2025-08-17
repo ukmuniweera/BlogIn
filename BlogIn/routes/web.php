@@ -45,7 +45,7 @@ Route::get('/update', function () {
 
 Route::post('/update', [userController::class, 'update'])->name('user.update');
 
-
+// post
 
 Route::post('/create', [PostController::class, 'create'])->name('post.create');
 
@@ -57,8 +57,6 @@ Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
 
 Route::get('post/edit', function () {
     return view('edit');
-});
-
-Route::post('post/edit/{postId}', [PostController::class, 'edit'])->name('post.edit');
+})->name('post.edit');
 
 Route::get('post/delete/{postId}', [PostController::class, 'delete'])->name('post.delete');
