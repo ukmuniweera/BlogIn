@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit Post</h1>
-    <form method="POST" action="{{ route('post.update', $post->id) }}">
+    <form method="POST" action="{{ route('post.update', $post->id) }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label>Title</label>
