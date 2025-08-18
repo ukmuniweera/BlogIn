@@ -15,9 +15,7 @@ use App\Http\Controllers\userController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class, 'show'])->name('post.show');
 
 Route::get('/register', function () {
     return view('register');
@@ -47,6 +45,8 @@ Route::post('/update', [userController::class, 'update'])->name('user.update');
 
 // post
 
+Route::get('post/card/{postId}', [PostController::class, 'card'])->name('post.card');
+
 Route::post('/create', [PostController::class, 'create'])->name('post.create');
 
 Route::get('/allposts', function () {
@@ -56,5 +56,7 @@ Route::get('/allposts', function () {
 Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
 
 Route::get('post/edit/{postId}', [PostController::class, 'edit'])->name('post.edit');
+
+Route::post('/post/update/{postId}', [PostController::class, 'update'])->name('post.update');
 
 Route::get('post/delete/{postId}', [PostController::class, 'delete'])->name('post.delete');

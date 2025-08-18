@@ -31,7 +31,7 @@
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a class="blog-header-logo text-dark" href="#">Large</a>
+                    <a class="blog-header-logo text-dark" href="{{ route('post.show') }}">Large</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
                     <a class="btn btn-sm btn-outline-secondary mr-2" href="{{ route('post.getall') }}">All Posts</a>

@@ -74,6 +74,6 @@ class userController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $user->delete();
-        return view('welcome');
+        return view('register');
     }
 }
