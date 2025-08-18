@@ -8,7 +8,7 @@
         </div>
     @endif
     <h1>Add New Post</h1>
-    <form method="POST" action="{{ route('post.create') }}">
+    <form method="POST" action="{{ route('post.create') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label>Title</label>
@@ -17,6 +17,10 @@
         <div class="form-group">
             <label>Content</label>
             <textarea class="form-control" name="content" rows="10"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image">
         </div>
         <button type="submit" class="btn btn-primary">Add</button>
     </form>

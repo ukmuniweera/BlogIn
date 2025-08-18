@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +23,21 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'required|image',
+        ]);
+
+        $image_path = null;
+        if ($request->hasFile('image')) {
+            $image_path = $request->file('image')->store('uploads', 'public');
+        }
+
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
+            'image' => $image_path,
             'user_id' => auth()->user()->id
         ]);
 
@@ -48,6 +61,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'image' => 'required|image'
         ]);
 
         $post = Post::findOrFail($postId);
@@ -55,7 +69,14 @@ class PostController extends Controller
         if (auth()->user()->id == $post->user_id) {
             $post->title = $request->title;
             $post->content = $request->content;
+
+            if ($request->hasFile('image')) {
+                $image_path = $request->file('image')->store('uploads', 'public');
+                $post->image = $image_path;
+            }
+
             $post->save();
+            
             return redirect()->route('post.getall');
         }
 
