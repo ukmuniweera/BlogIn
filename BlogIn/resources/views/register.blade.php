@@ -1,24 +1,25 @@
 @extends('layouts.index')
+
 @section('content')
-    <h1>Register</h1>
+    <h1 class="mb-4">Register</h1>
     <form method="POST" action="{{ route('user.register') }}">
         @csrf
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" name="name">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" class="form-control" name="confirm_password">
+        <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="confirm_password" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-success">Register</button>
     </form>
 @endsection

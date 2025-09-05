@@ -1,16 +1,16 @@
 @extends('layouts.index')
 
 @section('content')
-    <h1>Login</h1>
+    <h1 class="mb-4">Login</h1>
     <form method="POST" action="{{ route('user.login') }}">
         @csrf
-        <div class="form-group">
-            <label>Email</label>
-            <input type="text" class="form-control" name="email">
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required>
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>

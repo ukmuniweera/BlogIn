@@ -1,27 +1,23 @@
 @extends('layouts.dashlay')
 
 @section('content')
-    <p>Welcome! {{ Auth::user()->name }}</p>
-    @if (session('session'))
-        <div class="alert alert-success">
-            {{ session('session') }}
-        </div>
-    @endif
-    <h1>Add New Post</h1>
+    <h1>Welcome, {{ Auth::user()->name }}</h1>
+    <hr>
+    <h2>Add New Post</h2>
     <form method="POST" action="{{ route('post.create') }}" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input id="title" type="text" name="title" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Content</label>
-            <textarea class="form-control" name="content" rows="10"></textarea>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea id="content" name="content" rows="6" class="form-control" required></textarea>
         </div>
-        <div class="form-group">
-            <label>Image</label>
-            <input type="file" name="image">
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input id="image" type="file" name="image" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary">Add Post</button>
     </form>
 @endsection

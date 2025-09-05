@@ -9,13 +9,13 @@ use App\Http\Controllers\UserController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. 
-| Routes are organized for clarity and maintainability.
+| Organized and maintainable routes for Bloging.
 |
 */
 
 // Public Routes
 Route::get('/', [PostController::class, 'show'])->name('post.show');
+Route::get('post/card/{postId}', [PostController::class, 'card'])->name('post.card'); // Public access
 
 Route::get('/register', fn() => view('register'))->name('register.form');
 Route::post('/register', [UserController::class, 'register'])->name('user.register');
@@ -36,16 +36,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/update', fn() => view('update'))->name('update.form');
     Route::post('/update', [UserController::class, 'update'])->name('user.update');
 
-    // Posts
+    // Posts (CRUD)
     Route::prefix('post')->name('post.')->group(function () {
-        Route::get('card/{postId}', [PostController::class, 'card'])->name('card');
         Route::get('edit/{postId}', [PostController::class, 'edit'])->name('edit');
         Route::post('update/{postId}', [PostController::class, 'update'])->name('update');
         Route::get('delete/{postId}', [PostController::class, 'delete'])->name('delete');
         Route::post('create', [PostController::class, 'create'])->name('create');
     });
 
-    // All posts
+    // All posts dashboard view
     Route::get('/allposts', fn() => view('allPosts'))->name('allPosts');
     Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
 });

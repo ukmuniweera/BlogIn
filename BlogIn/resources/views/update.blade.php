@@ -4,14 +4,14 @@
     <h1>Update Account</h1>
     <form method="POST" action="{{ route('user.update') }}">
         @csrf
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" name="name">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" name="name" value="{{ Auth::user()->name }}" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password">
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Update Account</button>
     </form>
 @endsection

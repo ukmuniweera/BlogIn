@@ -1,19 +1,14 @@
 @extends('layouts.index')
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3>{{ $post->title }}</h3>
-        </div>
+    <div class="card shadow-sm mb-4">
         <div class="card-body">
-            <figure>
-                <blockquote class="blockquote">
-                    <p>{{ $post->content }}</p>
-                </blockquote>
-                <figcaption class="blockquote-footer">
-                    <h6>By: {{ $post->User->name }} | {{ $post->created_at->format('d M Y') }}</h6>
-                </figcaption>
-            </figure>
+            <h2 class="card-title">{{ $post->title }}</h2>
+            @if ($post->image)
+                <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid mb-3" alt="{{ $post->title }}">
+            @endif
+            <p class="card-text">{{ $post->content }}</p>
+            <p class="text-muted">By: {{ $post->User->name }} | {{ $post->created_at->format('d M Y') }}</p>
         </div>
     </div>
 @endsection

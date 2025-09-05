@@ -2,18 +2,19 @@
 
 @section('content')
     @include('layouts.hero')
-    <div class="row mb-2">
+    <div class="row g-4">
         @foreach ($posts as $post)
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 class="mb-0">
-                            {{ $post->title }}
-                        </h3>
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="image">
-                        <div class="mb-1 text-muted">{{ $post->created_at->format('d M Y') }}</div>
-                        <p class="card-text mb-auto">{{ str()->limit($post->content, 250, ' ... ') }}</p>
-                        <a href="{{ route('post.card', $post->id) }}">Continue reading</a>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="{{ $post->title }}">
+                    @endif
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ $post->title }}</h5>
+                        <p class="card-text">{{ Str::limit($post->content, 150, '...') }}</p>
+                        <p class="text-muted small">{{ $post->created_at->format('d M Y') }}</p>
+                        <a href="{{ route('post.card', $post->id) }}" class="btn btn-outline-primary mt-auto">Continue
+                            Reading</a>
                     </div>
                 </div>
             </div>

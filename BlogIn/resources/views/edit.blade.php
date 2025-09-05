@@ -4,18 +4,18 @@
     <h1>Edit Post</h1>
     <form method="POST" action="{{ route('post.update', $post->id) }}" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input id="title" type="text" name="title" class="form-control" value="{{ $post->title }}" required>
         </div>
-        <div class="form-group">
-            <label>Content</label>
-            <textarea class="form-control" name="content" rows="10"></textarea>
+        <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea id="content" name="content" rows="6" class="form-control" required>{{ $post->content }}</textarea>
         </div>
-        <div class="form-group">
-            <label>Image</label>
-            <input type="file" name="image">
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input id="image" type="file" name="image" class="form-control">
         </div>
-        <button type="submit" class="btn btn-primary">Edit</button>
+        <button type="submit" class="btn btn-success">Update Post</button>
     </form>
 @endsection
