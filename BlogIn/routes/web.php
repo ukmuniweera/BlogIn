@@ -2,61 +2,50 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\userController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Here is where you can register web routes for your application. 
+| Routes are organized for clarity and maintainability.
 |
 */
 
+// Public Routes
 Route::get('/', [PostController::class, 'show'])->name('post.show');
 
-Route::get('/register', function () {
-    return view('register');
+Route::get('/register', fn() => view('register'))->name('register.form');
+Route::post('/register', [UserController::class, 'register'])->name('user.register');
+
+Route::get('/login', fn() => view('login'))->name('login.form');
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+// Protected Routes (requires login)
+Route::middleware('auth')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
+
+    // User actions
+    Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::get('/delete', [UserController::class, 'delete'])->name('user.delete');
+
+    Route::get('/update', fn() => view('update'))->name('update.form');
+    Route::post('/update', [UserController::class, 'update'])->name('user.update');
+
+    // Posts
+    Route::prefix('post')->name('post.')->group(function () {
+        Route::get('card/{postId}', [PostController::class, 'card'])->name('card');
+        Route::get('edit/{postId}', [PostController::class, 'edit'])->name('edit');
+        Route::post('update/{postId}', [PostController::class, 'update'])->name('update');
+        Route::get('delete/{postId}', [PostController::class, 'delete'])->name('delete');
+        Route::post('create', [PostController::class, 'create'])->name('create');
+    });
+
+    // All posts
+    Route::get('/allposts', fn() => view('allPosts'))->name('allPosts');
+    Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
 });
-
-Route::post('/register', [userController::class, 'register'])->name('user.register');
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::post('/login', [userController::class, 'login'])->name('user.login');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/logout', [userController::class, 'logout'])->name('user.logout');
-
-Route::get('/delete', [userController::class, 'delete'])->name('user.delete');
-
-Route::get('/update', function () {
-    return view('update');
-})->name('update');
-
-Route::post('/update', [userController::class, 'update'])->name('user.update');
-
-// post
-
-Route::get('post/card/{postId}', [PostController::class, 'card'])->name('post.card');
-
-Route::post('/create', [PostController::class, 'create'])->name('post.create');
-
-Route::get('/allposts', function () {
-    return view('allPosts');
-})->name('allPosts');
-
-Route::get('/getall', [PostController::class, 'getall'])->name('post.getall');
-
-Route::get('post/edit/{postId}', [PostController::class, 'edit'])->name('post.edit');
-
-Route::post('/post/update/{postId}', [PostController::class, 'update'])->name('post.update');
-
-Route::get('post/delete/{postId}', [PostController::class, 'delete'])->name('post.delete');
